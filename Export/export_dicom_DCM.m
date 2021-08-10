@@ -1,4 +1,4 @@
-function export_dicom_DCM(app,dcmdir,directory,image,parameters,~)
+function folder_name = export_dicom_DCM(app,dcmdir,directory,image,parameters)
 
 
 % Phase orientation
@@ -27,11 +27,12 @@ TextMessage(app,strcat('Reading DICOM info from',{' '},dcmfilename));
 
 
 % create folder if not exist, and delete folder content
-dir1 = base_header.PatientName.FamilyName;
-dir2 = base_header.PatientID;
+dir1 = base_header.PatientID;
+dir2 = 'DICOM';
 dir3 = strcat(num2str(base_header.SeriesNumber),'P');
-folder_name = strcat(directory,filesep,dir1,filesep,dir2,filesep,dir3);
-if (~exist(folder_name, 'dir')); mkdir(fullfile(directory, dir1, dir2, dir3)); end
+dir4 = '1';
+folder_name = strcat(directory,filesep,dir1,filesep,dir2,filesep,dir3,filesep,dir4);
+if (~exist(folder_name, 'dir')); mkdir(fullfile(directory, dir1,dir2,dir3,dir4)); end
 delete([folder_name,filesep,'*']);
 
 

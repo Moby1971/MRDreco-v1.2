@@ -1,8 +1,8 @@
-function export_dicom_MRD(app,directory,image,parameters,tag)
+function folder_name = export_dicom_MRD(app,directory,image,parameters,tag)
 
 
 % create folder if not exist, and clear
-folder_name = [directory,[filesep,'DICOM-',tag]];
+folder_name = [directory,[filesep,tag,'P']];
 if (~exist(folder_name, 'dir')); mkdir(folder_name); end
 delete([folder_name,filesep,'*']);
 
@@ -40,7 +40,7 @@ for i=1:NR      % loop over all repetitions
                 % File name
                 fn = ['00000',num2str(filecounter)];
                 fn = fn(size(fn,2)-5:size(fn,2));
-                fname = [folder_name,filesep,'DICOM-XD-',fn,'.dcm'];
+                fname = [folder_name,filesep,fn,'.dcm'];
                 
                 % Dicom header
                 dcm_header = generate_dicomheader_MRD(app,parameters,fname,filecounter,i,j,k,z,dimx,dimy,dimz,dcmid);
